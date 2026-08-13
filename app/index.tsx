@@ -1,16 +1,16 @@
 import Panda from "@/components/Panda";
+import SugarProgress from "@/components/SugarProgress";
 import { Ionicons } from "@expo/vector-icons";
 import { Canvas } from "@react-three/fiber";
 import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
 
   return (
     <View className="flex-1 bg-[#F8F9F4]" style={{ paddingTop: insets.top }}>
       {/* Navbar */}
-      <View className="h-16 flex-row items-center justify-between bg-white px-5">
+      <View className="h-16 flex-row items-center justify-between  px-5">
         <Ionicons name="menu-outline" size={28} color="black" />
 
         <Text className="font-poppins font-bold  text-[18px]">
@@ -86,16 +86,8 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Sugar Level */}
-        <View className="mt-8">
-          <Text className="font-poppins-bold text-2xl text-black">
-            Sugar Level
-          </Text>
-
-          <Text className="mt-2 font-poppins text-base text-[#666]">
-            54g / 80g
-          </Text>
-        </View>
+        {/* Sugar Progress */}
+        <SugarProgress />
       </View>
     </View>
   );
