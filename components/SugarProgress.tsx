@@ -12,8 +12,7 @@ export default function SugarProgress({
   const sliderColor =
     sugarValue <= 40 ? "#2A732E" : sugarValue <= 80 ? "#F59E0B" : "#EF4444";
   return (
-    <View className="mt-5 rounded-3xl bg-white p-5 pb-6 pt-5">
-      {/* Header */}
+    <View className="mt-3 rounded-3xl bg-white p-5 pb-3 pt-5">
       <View className="flex-row items-center justify-between">
         <Text className="font-poppins font-medium text-sm text-black">
           Today&apos;s Sugar Progress
@@ -31,12 +30,10 @@ export default function SugarProgress({
         </View>
       </View>
       {/* Progress + Total Sugar */}
-      <View className="mt-3 flex-row items-center justify-between">
-        {/* Progress Circle */}
+      <View className="mt-1 flex-row items-center justify-between">
         <View className="items-center">
           <View className="h-40 w-40 items-center justify-center">
-            <Svg width="160" height="160" viewBox="0 0 160 160">
-              {/* Background circle */}
+            <Svg width="140" height="140" viewBox="0 0 160 160">
               <Circle
                 cx="80"
                 cy="80"
@@ -46,7 +43,6 @@ export default function SugarProgress({
                 fill="none"
               />
 
-              {/* Progress circle */}
               <Circle
                 cx="80"
                 cy="80"
@@ -62,7 +58,6 @@ export default function SugarProgress({
               />
             </Svg>
 
-            {/* Text in the middle */}
             <View className="absolute items-center">
               <Text className="font-poppins-bold text-4xl text-black">68%</Text>
 
@@ -73,11 +68,10 @@ export default function SugarProgress({
           </View>
         </View>
 
-        {/* Total Sugar */}
         <View className="ml-4 flex-1">
           <Text className="font-poppins text-xs text-[#666]">Total Sugar</Text>
 
-          <Text className="mt-1 font-poppins-bold text-2xl text-[#2A732E]">
+          <Text className=" font-poppins-bold text-2xl text-[#2A732E]">
             54g
             <Text className="font-poppins text-base text-[#666]">
               {" / 80g"}
@@ -91,7 +85,7 @@ export default function SugarProgress({
           {/* Sugar Level Bar */}
           <View className="">
             <Slider
-              style={{ width: "100%", height: 40 }}
+              style={{ width: "100%", height: 30 }}
               minimumValue={0}
               maximumValue={100}
               value={sugarValue}
@@ -101,7 +95,6 @@ export default function SugarProgress({
               thumbTintColor={sliderColor}
             />
 
-            {/* Labels */}
             <View className=" flex-row justify-between">
               <View className="items-start">
                 <Text className="font-poppins-medium text-xs text-[#2A732E]">

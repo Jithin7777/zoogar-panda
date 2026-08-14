@@ -9,13 +9,13 @@ export default function Panda({ sugarValue }: { sugarValue: number }) {
   const gltf = useGLTF(pandaModel);
   const scene = Array.isArray(gltf) ? gltf[0].scene : gltf.scene;
 
-  // Get face parts
+  // face parts
   const mouth = scene.getObjectByName("mouth");
   const eyebrows = scene.getObjectByName("eyebrows");
   const head = scene.getObjectByName("head");
   const eyesGroup = scene.getObjectByName("eyes");
 
-  // Get individual eyes
+  // individual eyes
   let eyeL: THREE.Object3D | null = null;
   let eyeR: THREE.Object3D | null = null;
 
@@ -33,8 +33,7 @@ export default function Panda({ sugarValue }: { sugarValue: number }) {
     sugarValue <= 40 ? "low" : sugarValue <= 80 ? "moderate" : "high";
 
   // Store original mouth transform
-  const originalMouthRotationZ = useRef(mouth?.rotation.z ?? 0);
-
+  const originalMouthRotationZ = useRef(0);
   // Store original mouth scale
   const originalMouthScale = useRef(
     mouth ? mouth.scale.clone() : new THREE.Vector3(1, 1, 1),
@@ -88,14 +87,14 @@ export default function Panda({ sugarValue }: { sugarValue: number }) {
       0.08,
     );
 
-    // Smooth eyebrow animation
+    //  eyebrow animation
     eyebrowRotation.current = THREE.MathUtils.lerp(
       eyebrowRotation.current,
       targetEyebrowRotation,
       0.08,
     );
 
-    // Smooth eye animation
+    //  eye animation
     if (eyeL && eyeR) {
       eyeScaleY.current = THREE.MathUtils.lerp(
         eyeScaleY.current,
@@ -104,7 +103,7 @@ export default function Panda({ sugarValue }: { sugarValue: number }) {
       );
     }
 
-    // Smooth head animation
+    //  head animation
     if (head) {
       headRotationZ.current = THREE.MathUtils.lerp(
         headRotationZ.current,
@@ -113,13 +112,9 @@ export default function Panda({ sugarValue }: { sugarValue: number }) {
       );
     }
 
-    // -------------------------
     // MOUTH
-    // -------------------------
 
-    if (level === "low") {
-      // Flip 180 degrees.
-      // SCALE IS NOT CHANGED.
+    if (level === "low" || level === "moderate") {
       mouth.rotation.z =
         originalMouthRotationZ.current + mouthRotation.current + Math.PI;
     } else {
@@ -127,27 +122,20 @@ export default function Panda({ sugarValue }: { sugarValue: number }) {
       mouth.rotation.z = originalMouthRotationZ.current + mouthRotation.current;
     }
 
-    // Always keep original mouth size
     mouth.scale.copy(originalMouthScale.current);
 
-    // -------------------------
     // EYEBROWS
-    // -------------------------
 
     eyebrows.rotation.z = eyebrowRotation.current;
 
-    // -------------------------
     // EYES
-    // -------------------------
 
     if (eyeL && eyeR) {
       eyeL.scale.y = eyeScaleY.current;
       eyeR.scale.y = eyeScaleY.current;
     }
 
-    // -------------------------
     // HEAD
-    // -------------------------
 
     if (head) {
       head.rotation.z = headRotationZ.current;
