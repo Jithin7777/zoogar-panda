@@ -2,11 +2,13 @@ import Panda from "@/components/Panda";
 import SugarProgress from "@/components/SugarProgress";
 import { Ionicons } from "@expo/vector-icons";
 import { Canvas } from "@react-three/fiber";
+import { useState } from "react";
 import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import QuickActions from "../components/QuickActions";
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
-
+  const [sugarValue, setSugarValue] = useState(68);
   return (
     <View className="flex-1 bg-[#F8F9F4]" style={{ paddingTop: insets.top }}>
       {/* Navbar */}
@@ -34,16 +36,16 @@ export default function HomeScreen() {
               Jino! 👋
             </Text>
 
-            <Text className="mt-2 font-poppins text-base text-[#666]">
+            <Text className="mt-2 font-poppins text-sm  text-[#666]">
               Small choices today,
             </Text>
 
-            <Text className="font-poppins text-base text-[#666]">
+            <Text className="font-poppins text-sm text-[#666]">
               better health tomorrow
             </Text>
 
             {/* Streak Card */}
-            <View className="mt-4 max-w-42 flex-row items-center rounded-xl bg-white p-3 shadow-sm">
+            <View className="mt-3 max-w-42 flex-row items-center rounded-xl bg-white p-3 shadow-sm">
               {/* Fire Icon */}
               <View
                 className="h-14 w-14 items-center justify-center rounded-full"
@@ -56,7 +58,7 @@ export default function HomeScreen() {
 
               {/* Text Content */}
               <View className="ml-3 flex-1">
-                <Text className="font-poppins-bold text-3xl text-[#2A732E]">
+                <Text className="font-poppins font-medium text-2xl text-[#2A732E]">
                   12
                 </Text>
 
@@ -80,14 +82,13 @@ export default function HomeScreen() {
               }}
             >
               <ambientLight intensity={1.5} />
-
-              <Panda />
+              <Panda sugarValue={sugarValue} />
             </Canvas>
           </View>
         </View>
-
         {/* Sugar Progress */}
-        <SugarProgress />
+        <SugarProgress sugarValue={sugarValue} setSugarValue={setSugarValue} />
+        <QuickActions />
       </View>
     </View>
   );

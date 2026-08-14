@@ -1,10 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import Slider from "@react-native-community/slider";
-import { useState } from "react";
 import { Text, View } from "react-native";
 import Svg, { Circle } from "react-native-svg";
-export default function SugarProgress() {
-  const [sugarValue, setSugarValue] = useState(68);
+export default function SugarProgress({
+  sugarValue,
+  setSugarValue,
+}: {
+  sugarValue: number;
+  setSugarValue: (value: number) => void;
+}) {
   const sliderColor =
     sugarValue <= 40 ? "#2A732E" : sugarValue <= 80 ? "#F59E0B" : "#EF4444";
   return (
@@ -27,7 +31,7 @@ export default function SugarProgress() {
         </View>
       </View>
       {/* Progress + Total Sugar */}
-      <View className="mt-6 flex-row items-center justify-between">
+      <View className="mt-3 flex-row items-center justify-between">
         {/* Progress Circle */}
         <View className="items-center">
           <View className="h-40 w-40 items-center justify-center">
@@ -71,7 +75,7 @@ export default function SugarProgress() {
 
         {/* Total Sugar */}
         <View className="ml-4 flex-1">
-          <Text className="font-poppins text-sm text-[#666]">Total Sugar</Text>
+          <Text className="font-poppins text-xs text-[#666]">Total Sugar</Text>
 
           <Text className="mt-1 font-poppins-bold text-2xl text-[#2A732E]">
             54g
